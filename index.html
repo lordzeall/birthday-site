@@ -28,6 +28,67 @@
             overflow-x: hidden;
         }
 
+        /* ═══ OVERLAY ═══ */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #fdf6f0 0%, #fce4ec 50%, #f5d5e0 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            cursor: pointer;
+            transition: all 1s ease;
+        }
+
+        .overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .overlay-content {
+            text-align: center;
+        }
+
+        .overlay-heart {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: overlayPulse 1.5s ease infinite;
+        }
+
+        @keyframes overlayPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .overlay h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .overlay p {
+            font-size: 0.9rem;
+            color: #888;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .overlay-arrow {
+            font-size: 1.5rem;
+            color: var(--rose);
+            animation: arrowBounce 1s ease infinite;
+        }
+
+        @keyframes arrowBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
         /* ═══ FLOATING ELEMENTS ═══ */
         .floating-elements {
             position: fixed;
@@ -517,6 +578,16 @@
     </style>
 </head>
 <body>
+    <!-- Click to Enter Overlay -->
+    <div class="overlay" id="overlay" onclick="enterSite()">
+        <div class="overlay-content">
+            <div class="overlay-heart">💖</div>
+            <h2>For You, Sayang</h2>
+            <p>Klik di mana aja buat buka</p>
+            <div class="overlay-arrow">↓</div>
+        </div>
+    </div>
+
     <!-- Floating Elements -->
     <div class="floating-elements" id="floatingElements"></div>
 
@@ -710,7 +781,10 @@
             observer.observe(el);
         });
 
-        // ═══ MUSIC — AUTO PLAY ═══
+        // ═══ OVERLAY & MUSIC ═══
+        let player = null;
+        let musicStarted = false;
+
         var tag = document.createElement('script');
         tag.src = 'https://www.youtube.com/iframe_api';
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -722,17 +796,23 @@
                 width: '1',
                 videoId: 'o25_Tn8BnFM',
                 playerVars: {
-                    'autoplay': 1,
+                    'autoplay': 0,
                     'loop': 1,
                     'playlist': 'o25_Tn8BnFM',
                     'mute': 0
-                },
-                events: {
-                    'onReady': function(e) {
-                        e.target.playVideo();
-                    }
                 }
             });
+        }
+
+        function enterSite() {
+            // Hide overlay
+            document.getElementById('overlay').classList.add('hidden');
+            
+            // Play music
+            if (player && !musicStarted) {
+                player.playVideo();
+                musicStarted = true;
+            }
         }
     </script>
 </body>
