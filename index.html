@@ -506,44 +506,6 @@
             font-weight: 300;
         }
 
-        /* ═══ MUSIC PLAYER ═══ */
-        .music-player {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 55px;
-            height: 55px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 25px rgba(232, 160, 191, 0.3);
-            cursor: pointer;
-            z-index: 100;
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeInUp 1s ease 2s forwards;
-        }
-
-        .music-player:hover {
-            transform: scale(1.1) rotate(10deg);
-            box-shadow: 0 8px 30px rgba(232, 160, 191, 0.5);
-        }
-
-        .music-player.playing {
-            animation: musicPulse 1s ease infinite;
-        }
-
-        @keyframes musicPulse {
-            0%, 100% { box-shadow: 0 5px 25px rgba(232, 160, 191, 0.3); }
-            50% { box-shadow: 0 5px 35px rgba(232, 160, 191, 0.6); }
-        }
-
-        .music-player .icon {
-            font-size: 1.4rem;
-        }
-
         /* ═══ RESPONSIVE ═══ */
         @media (max-width: 768px) {
             .countdown { gap: 20px; }
@@ -668,11 +630,6 @@
         <p>Made with love, for you 💕</p>
     </footer>
 
-    <!-- Music Player -->
-    <div class="music-player" id="musicPlayer" onclick="toggleMusic()">
-        <span class="icon" id="musicIcon">🔇</span>
-    </div>
-
     <!-- YouTube Player (hidden) -->
     <div id="youtube-player" style="position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;opacity:0;"></div>
 
@@ -753,10 +710,7 @@
             observer.observe(el);
         });
 
-        // ═══ MUSIC ═══
-        let musicPlaying = false;
-        let player = null;
-
+        // ═══ MUSIC — AUTO PLAY ═══
         var tag = document.createElement('script');
         tag.src = 'https://www.youtube.com/iframe_api';
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -768,28 +722,17 @@
                 width: '1',
                 videoId: 'o25_Tn8BnFM',
                 playerVars: {
-                    'autoplay': 0,
+                    'autoplay': 1,
                     'loop': 1,
-                    'playlist': 'o25_Tn8BnFM'
+                    'playlist': 'o25_Tn8BnFM',
+                    'mute': 0
+                },
+                events: {
+                    'onReady': function(e) {
+                        e.target.playVideo();
+                    }
                 }
             });
-        }
-
-        function toggleMusic() {
-            const icon = document.getElementById('musicIcon');
-            const playerBtn = document.getElementById('musicPlayer');
-            if (!player) return;
-            
-            if (musicPlaying) {
-                player.pauseVideo();
-                icon.textContent = '🔇';
-                playerBtn.classList.remove('playing');
-            } else {
-                player.playVideo();
-                icon.textContent = '🎵';
-                playerBtn.classList.add('playing');
-            }
-            musicPlaying = !musicPlaying;
         }
     </script>
 </body>
