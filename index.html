@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎂 Happy Birthday Sayang! 🎂</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: white;
+        }
+
+        /* Floating Hearts */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 20px;
+            animation: floatUp linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(255, 105, 180, 0.8);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 105, 180, 0.5); }
+            to { text-shadow: 0 0 40px rgba(255, 105, 180, 1), 0 0 60px rgba(255, 105, 180, 0.5); }
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .hero .date {
+            font-size: 1.2rem;
+            color: #ff69b4;
+            margin-bottom: 40px;
+        }
+
+        .cake-emoji {
+            font-size: 5rem;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            animation: bounce 2s ease infinite;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Countdown Section */
+        .countdown-section {
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .countdown-section h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #ff69b4;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px 30px;
+            min-width: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .countdown-item .number {
+            font-size: 3rem;
+            font-weight: 600;
+            color: #ff69b4;
+        }
+
+        .countdown-item .label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Letter Section */
+        .letter-section {
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .letter {
+            background: linear-gradient(135deg, #fff5f8 0%, #ffe4ec 100%);
+            color: #333;
+            max-width: 600px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+            transform: rotate(-1deg);
+            position: relative;
+        }
+
+        .letter::before {
+            content: '💌';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+        }
+
+        .letter h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #d63384;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .letter p {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .letter .signature {
+            text-align: right;
+            margin-top: 30px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #d63384;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery-section h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #ff69b4;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .gallery-item {
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px dashed rgba(255, 105, 180, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            border-color: #ff69b4;
+            background: rgba(255, 105, 180, 0.1);
+        }
+
+        .gallery-item .placeholder {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+
+        .gallery-item .text {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Wishes Section */
+        .wishes-section {
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .wishes-section h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #ff69b4;
+        }
+
+        .wishes-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .wish-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            width: 220px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .wish-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 105, 180, 0.2);
+        }
+
+        .wish-card .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .wish-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .music-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.2);
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            top: -10px;
+            font-size: 1rem;
+            animation: confettiFall linear forwards;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        footer .hearts {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            animation: pulse 1s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .letter { padding: 25px; margin: 0 10px; }
+            .gallery-item { width: 150px; height: 150px; }
+            .wish-card { width: 100%; max-width: 300px; }
+        }
+
+        /* Envelope Animation */
+        .envelope-container {
+            cursor: pointer;
+            margin: 20px;
+        }
+
+        .envelope {
+            width: 200px;
+            height: 150px;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            border-radius: 10px;
+            position: relative;
+            margin: 0 auto;
+            transition: transform 0.3s;
+        }
+
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(135deg, #ff1493, #c71585);
+            border-radius: 10px 10px 0 0;
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+        }
+
+        .envelope .heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts -->
+    <div class="hearts-container" id="hearts"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="cake-emoji">🎂</div>
+        <h1>Happy Birthday!</h1>
+        <p class="subtitle">Selamat Ulang Tahun Sayangku Tercinta 💕</p>
+        <p class="date">📅 [TANGGAL ULANG TAHUN]</p>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="countdown-section">
+        <h2>✨ Countdown ✨</h2>
+        <div class="countdown" id="countdown">
+            <div class="countdown-item">
+                <div class="number" id="days">0</div>
+                <div class="label">Hari</div>
+            </div>
+            <div class="countdown-item">
+                <div class="number" id="hours">0</div>
+                <div class="label">Jam</div>
+            </div>
+            <div class="countdown-item">
+                <div class="number" id="minutes">0</div>
+                <div class="label">Menit</div>
+            </div>
+            <div class="countdown-item">
+                <div class="number" id="seconds">0</div>
+                <div class="label">Detik</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Letter Section -->
+    <section class="letter-section">
+        <div class="letter">
+            <h3>Surat Cinta Untukmu 💌</h3>
+            <p>
+                [TULIS SURAT CINTA LO DI SINI]
+                <br><br>
+                Setiap hari bersamamu adalah hadiah terindah dalam hidupku. 
+                Di hari ulang tahunmu ini, aku ingin kamu tahu betapa berharganya kamu bagiku.
+                <br><br>
+                Semoga semua harapan dan impianmu tercapai. Aku akan selalu ada di sampingmu, 
+                mendukungmu dalam setiap langkah.
+                <br><br>
+                Happy Birthday, sayangku! 🎂💖
+            </p>
+            <div class="signature">
+                Dengan cinta,<br>
+                [NAMA LO]
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <h2>📸 Momen Indah Kita 📸</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <div class="placeholder">📷</div>
+                <div class="text">Foto 1</div>
+            </div>
+            <div class="gallery-item">
+                <div class="placeholder">📷</div>
+                <div class="text">Foto 2</div>
+            </div>
+            <div class="gallery-item">
+                <div class="placeholder">📷</div>
+                <div class="text">Foto 3</div>
+            </div>
+            <div class="gallery-item">
+                <div class="placeholder">📷</div>
+                <div class="text">Foto 4</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wishes Section -->
+    <section class="wishes-section">
+        <h2>🌟 Harapan Terbaikku 🌟</h2>
+        <div class="wishes-grid">
+            <div class="wish-card">
+                <div class="icon">💖</div>
+                <p>Semoga selalu diberi kesehatan dan kebahagiaan</p>
+            </div>
+            <div class="wish-card">
+                <div class="icon">✨</div>
+                <p>Semoga impianmu menjadi kenyataan</p>
+            </div>
+            <div class="wish-card">
+                <div class="icon">🌟</div>
+                <p>Semoga selalu menjadi penerang di hidupku</p>
+            </div>
+            <div class="wish-card">
+                <div class="icon">💕</div>
+                <p>Semoga cinta kita selalu abadi</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Dibuat dengan 💖 khusus untukmu</p>
+        <div class="hearts">💖 💕 💗 💓 💝</div>
+    </footer>
+
+    <!-- Music Player -->
+    <div class="music-player">
+        <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
+    </div>
+
+    <script>
+        // Floating Hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = ['💖', '💕', '💗', '💓', '💝', '💘'][Math.floor(Math.random() * 6)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 7000);
+        }
+
+        setInterval(createHeart, 500);
+
+        // Countdown Timer
+        // Ganti tanggal di sini: YYYY, MM-1 (Januari=0), DD
+        const birthday = new Date([TAHUN], [BULAN]-1, [TANGGAL]);
+        
+        function updateCountdown() {
+            const now = new Date();
+            const diff = birthday - now;
+            
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML = 
+                    '<div class="countdown-item"><div class="number">🎉</div><div class="label">Happy Birthday!</div></div>';
+                launchConfetti();
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Confetti
+        function launchConfetti() {
+            const confetti = ['🎉', '🎊', '🎈', '🎁', '✨', '🌟'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const el = document.createElement('div');
+                    el.className = 'confetti';
+                    el.innerHTML = confetti[Math.floor(Math.random() * confetti.length)];
+                    el.style.left = Math.random() * 100 + '%';
+                    el.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(el);
+                    setTimeout(() => el.remove(), 4000);
+                }, i * 100);
+            }
+        }
+
+        // Music Toggle
+        let musicPlaying = false;
+        const audio = new Audio('[URL_MUSIK_FAVORIT]'); // Ganti dengan URL musik
+        
+        function toggleMusic() {
+            const btn = document.getElementById('musicBtn');
+            if (musicPlaying) {
+                audio.pause();
+                btn.innerHTML = '🔇';
+            } else {
+                audio.play();
+                btn.innerHTML = '🎵';
+            }
+            musicPlaying = !musicPlaying;
+        }
+
+        // Envelope Click
+        document.querySelector('.envelope-container')?.addEventListener('click', function() {
+            launchConfetti();
+        });
+
+        // Scroll Indicator
+        document.querySelector('.scroll-indicator')?.addEventListener('click', function() {
+            document.querySelector('.countdown-section').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
