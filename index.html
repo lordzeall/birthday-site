@@ -497,52 +497,100 @@
             margin-bottom: 50px;
         }
 
-        /* Carousel */
+        /* Carousel 3D */
         .carousel-wrapper {
             position: relative;
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
+            height: 520px;
+            perspective: 1000px;
         }
 
         .carousel {
-            display: flex;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: grab;
-        }
-
-        .carousel:active {
-            cursor: grabbing;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
         }
 
         .carousel-item {
-            min-width: 100%;
-            padding: 0 20px;
-            box-sizing: border-box;
+            position: absolute;
+            width: 80%;
+            height: 100%;
+            left: 10%;
+            opacity: 0;
+            transform: scale(0.8) translateX(100%);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
         }
 
-        .carousel-item img {
+        .carousel-item.active {
+            opacity: 1;
+            transform: scale(1) translateX(0);
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .carousel-item.prev {
+            opacity: 0.6;
+            transform: scale(0.85) translateX(-70%) rotateY(15deg);
+            z-index: 5;
+        }
+
+        .carousel-item.next {
+            opacity: 0.6;
+            transform: scale(0.85) translateX(70%) rotateY(-15deg);
+            z-index: 5;
+        }
+
+        .carousel-item .photo-frame {
+            position: relative;
             width: 100%;
-            height: 450px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            height: 100%;
+            background: white;
+            border-radius: 15px;
+            padding: 12px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            transform: rotate(-2deg);
             transition: transform 0.4s ease;
         }
 
-        .carousel-item img:hover {
-            transform: scale(1.02);
+        .carousel-item.active .photo-frame {
+            transform: rotate(0deg);
         }
 
-        .carousel-item .placeholder-img {
+        .carousel-item .photo-frame img {
             width: 100%;
-            height: 450px;
-            background: linear-gradient(135deg, var(--rose-light) 0%, white 100%);
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .carousel-item .photo-frame .tape {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-3deg);
+            width: 70px;
+            height: 22px;
+            background: rgba(255, 220, 150, 0.7);
+            border-radius: 3px;
+        }
+
+        .carousel-item .photo-frame .caption {
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.95);
+            padding: 6px 18px;
             border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            font-size: 0.75rem;
+            color: var(--dark);
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            white-space: nowrap;
+        }
         }
 
         .carousel-item .placeholder-img .icon {
@@ -755,130 +803,335 @@
             <div class="carousel-wrapper">
                 <div class="carousel" id="carousel">
                     <div class="carousel-item">
-                        <img src="photos/1.jpg" alt="Foto 1" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/1.jpg" alt="Foto 1" loading="lazy">
+                            <div class="caption">1 / 38</div>
+                        </div>
+                    </div> alt="Foto 1" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/2.jpg" alt="Foto 2" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/2.jpg" alt="Foto 2" loading="lazy">
+                            <div class="caption">2 / 38</div>
+                        </div>
+                    </div> alt="Foto 2" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/3.jpg" alt="Foto 3" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/3.jpg" alt="Foto 3" loading="lazy">
+                            <div class="caption">3 / 38</div>
+                        </div>
+                    </div> alt="Foto 3" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/4.jpg" alt="Foto 4" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/4.jpg" alt="Foto 4" loading="lazy">
+                            <div class="caption">4 / 38</div>
+                        </div>
+                    </div> alt="Foto 4" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/5.jpg" alt="Foto 5" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/5.jpg" alt="Foto 5" loading="lazy">
+                            <div class="caption">5 / 38</div>
+                        </div>
+                    </div> alt="Foto 5" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/6.jpg" alt="Foto 6" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/6.jpg" alt="Foto 6" loading="lazy">
+                            <div class="caption">6 / 38</div>
+                        </div>
+                    </div> alt="Foto 6" loading="lazy">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="photos/8.jpg" alt="Foto 8" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/8.jpg" alt="Foto 8" loading="lazy">
+                            <div class="caption">8 / 38</div>
+                        </div>
+                    </div> alt="Foto 8" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/9.jpg" alt="Foto 9" loading="lazy">
-                    </div>
-
-                    <div class="carousel-item">
-                        <img src="photos/11.jpg" alt="Foto 11" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/12.jpg" alt="Foto 12" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/13.jpg" alt="Foto 13" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/14.jpg" alt="Foto 14" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/15.jpg" alt="Foto 15" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/16.jpg" alt="Foto 16" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/9.jpg" alt="Foto 9" loading="lazy">
+                            <div class="caption">9 / 38</div>
+                        </div>
+                    </div> alt="Foto 9" loading="lazy">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="photos/18.jpg" alt="Foto 18" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/11.jpg" alt="Foto 11" loading="lazy">
+                            <div class="caption">11 / 38</div>
+                        </div>
+                    </div> alt="Foto 11" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/19.jpg" alt="Foto 19" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/12.jpg" alt="Foto 12" loading="lazy">
+                            <div class="caption">12 / 38</div>
+                        </div>
+                    </div> alt="Foto 12" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/20.jpg" alt="Foto 20" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/13.jpg" alt="Foto 13" loading="lazy">
+                            <div class="caption">13 / 38</div>
+                        </div>
+                    </div> alt="Foto 13" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/21.jpg" alt="Foto 21" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/14.jpg" alt="Foto 14" loading="lazy">
+                            <div class="caption">14 / 38</div>
+                        </div>
+                    </div> alt="Foto 14" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/22.jpg" alt="Foto 22" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/15.jpg" alt="Foto 15" loading="lazy">
+                            <div class="caption">15 / 38</div>
+                        </div>
+                    </div> alt="Foto 15" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/23.jpg" alt="Foto 23" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/16.jpg" alt="Foto 16" loading="lazy">
+                            <div class="caption">16 / 38</div>
+                        </div>
+                    </div> alt="Foto 16" loading="lazy">
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/18.jpg" alt="Foto 18" loading="lazy">
+                            <div class="caption">18 / 38</div>
+                        </div>
+                    </div> alt="Foto 18" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/24.jpg" alt="Foto 24" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/19.jpg" alt="Foto 19" loading="lazy">
+                            <div class="caption">19 / 38</div>
+                        </div>
+                    </div> alt="Foto 19" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/25.jpg" alt="Foto 25" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/20.jpg" alt="Foto 20" loading="lazy">
+                            <div class="caption">20 / 38</div>
+                        </div>
+                    </div> alt="Foto 20" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/26.jpg" alt="Foto 26" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/21.jpg" alt="Foto 21" loading="lazy">
+                            <div class="caption">21 / 38</div>
+                        </div>
+                    </div> alt="Foto 21" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/27.jpg" alt="Foto 27" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/22.jpg" alt="Foto 22" loading="lazy">
+                            <div class="caption">22 / 38</div>
+                        </div>
+                    </div> alt="Foto 22" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/28.jpg" alt="Foto 28" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/23.jpg" alt="Foto 23" loading="lazy">
+                            <div class="caption">23 / 38</div>
+                        </div>
+                    </div> alt="Foto 23" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/29.jpg" alt="Foto 29" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/24.jpg" alt="Foto 24" loading="lazy">
+                            <div class="caption">24 / 38</div>
+                        </div>
+                    </div> alt="Foto 24" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/30.jpg" alt="Foto 30" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/25.jpg" alt="Foto 25" loading="lazy">
+                            <div class="caption">25 / 38</div>
+                        </div>
+                    </div> alt="Foto 25" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/31.jpg" alt="Foto 31" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/26.jpg" alt="Foto 26" loading="lazy">
+                            <div class="caption">26 / 38</div>
+                        </div>
+                    </div> alt="Foto 26" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/32.jpg" alt="Foto 32" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/27.jpg" alt="Foto 27" loading="lazy">
+                            <div class="caption">27 / 38</div>
+                        </div>
+                    </div> alt="Foto 27" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/33.jpg" alt="Foto 33" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/28.jpg" alt="Foto 28" loading="lazy">
+                            <div class="caption">28 / 38</div>
+                        </div>
+                    </div> alt="Foto 28" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/34.jpg" alt="Foto 34" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/29.jpg" alt="Foto 29" loading="lazy">
+                            <div class="caption">29 / 38</div>
+                        </div>
+                    </div> alt="Foto 29" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/35.jpg" alt="Foto 35" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/30.jpg" alt="Foto 30" loading="lazy">
+                            <div class="caption">30 / 38</div>
+                        </div>
+                    </div> alt="Foto 30" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/36.jpg" alt="Foto 36" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/31.jpg" alt="Foto 31" loading="lazy">
+                            <div class="caption">31 / 38</div>
+                        </div>
+                    </div> alt="Foto 31" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/37.jpg" alt="Foto 37" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/32.jpg" alt="Foto 32" loading="lazy">
+                            <div class="caption">32 / 38</div>
+                        </div>
+                    </div> alt="Foto 32" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/38.jpg" alt="Foto 38" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/33.jpg" alt="Foto 33" loading="lazy">
+                            <div class="caption">33 / 38</div>
+                        </div>
+                    </div> alt="Foto 33" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/39.jpg" alt="Foto 39" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/34.jpg" alt="Foto 34" loading="lazy">
+                            <div class="caption">34 / 38</div>
+                        </div>
+                    </div> alt="Foto 34" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/40.jpg" alt="Foto 40" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/35.jpg" alt="Foto 35" loading="lazy">
+                            <div class="caption">35 / 38</div>
+                        </div>
+                    </div> alt="Foto 35" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/41.jpg" alt="Foto 41" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/36.jpg" alt="Foto 36" loading="lazy">
+                            <div class="caption">36 / 38</div>
+                        </div>
+                    </div> alt="Foto 36" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/19.jpg" alt="Foto 19" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/37.jpg" alt="Foto 37" loading="lazy">
+                            <div class="caption">37 / 38</div>
+                        </div>
+                    </div> alt="Foto 37" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/20.jpg" alt="Foto 20" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/38.jpg" alt="Foto 38" loading="lazy">
+                            <div class="caption">38 / 38</div>
+                        </div>
+                    </div> alt="Foto 38" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="photos/21.jpg" alt="Foto 21" loading="lazy">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/39.jpg" alt="Foto 39" loading="lazy">
+                            <div class="caption">39 / 38</div>
+                        </div>
+                    </div> alt="Foto 39" loading="lazy">
+                    </div>
+                    <div class="carousel-item">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/40.jpg" alt="Foto 40" loading="lazy">
+                            <div class="caption">40 / 38</div>
+                        </div>
+                    </div> alt="Foto 40" loading="lazy">
+                    </div>
+                    <div class="carousel-item">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/41.jpg" alt="Foto 41" loading="lazy">
+                            <div class="caption">41 / 38</div>
+                        </div>
+                    </div> alt="Foto 41" loading="lazy">
+                    </div>
+                    <div class="carousel-item">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/19.jpg" alt="Foto 19" loading="lazy">
+                            <div class="caption">19 / 38</div>
+                        </div>
+                    </div> alt="Foto 19" loading="lazy">
+                    </div>
+                    <div class="carousel-item">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/20.jpg" alt="Foto 20" loading="lazy">
+                            <div class="caption">20 / 38</div>
+                        </div>
+                    </div> alt="Foto 20" loading="lazy">
+                    </div>
+                    <div class="carousel-item">
+                        <div class="photo-frame">
+                            <div class="tape"></div>
+                            <img src="photos/21.jpg" alt="Foto 21" loading="lazy">
+                            <div class="caption">21 / 38</div>
+                        </div>
+                    </div> alt="Foto 21" loading="lazy">
                     </div>
                 </div>
                 <div class="carousel-nav">
@@ -1026,87 +1279,56 @@
             });
         }
 
-        // ═══ CAROUSEL ═══
+        // ═══ 3D CAROUSEL ═══
         let currentSlide = 0;
         const carousel = document.getElementById('carousel');
-        const dotsContainer = document.getElementById('carouselDots');
         let slides = document.querySelectorAll('.carousel-item');
-        let isDragging = false;
-        let startPos = 0;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
-
-        // Create dots
-        slides.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-            dot.onclick = () => goToSlide(i);
-            dotsContainer.appendChild(dot);
-        });
-
-        function updateDots() {
-            document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentSlide);
-            });
-        }
-
+        
+        // Set first slide as active
+        slides[0].classList.add('active');
+        
         function goToSlide(index) {
             currentSlide = index;
-            currentTranslate = -index * 100;
-            prevTranslate = currentTranslate;
-            carousel.style.transform = `translateX(${currentTranslate}%)`;
-            updateDots();
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active', 'prev', 'next');
+                if (i === currentSlide) {
+                    slide.classList.add('active');
+                } else if (i === (currentSlide - 1 + slides.length) % slides.length) {
+                    slide.classList.add('prev');
+                } else if (i === (currentSlide + 1) % slides.length) {
+                    slide.classList.add('next');
+                }
+            });
         }
-
+        
         function nextSlide() {
             currentSlide = (currentSlide + 1) % slides.length;
             goToSlide(currentSlide);
         }
-
+        
         function prevSlide() {
             currentSlide = (currentSlide - 1 + slides.length) % slides.length;
             goToSlide(currentSlide);
         }
-
+        
         // Touch/Swipe support
-        carousel.addEventListener('mousedown', dragStart);
-        carousel.addEventListener('mousemove', drag);
-        carousel.addEventListener('mouseup', dragEnd);
-        carousel.addEventListener('mouseleave', dragEnd);
-        carousel.addEventListener('touchstart', dragStart);
-        carousel.addEventListener('touchmove', drag);
-        carousel.addEventListener('touchend', dragEnd);
-
-        function dragStart(e) {
-            isDragging = true;
-            startPos = getPositionX(e);
-        }
-
-        function drag(e) {
-            if (!isDragging) return;
-            const currentPosition = getPositionX(e);
-            const diff = currentPosition - startPos;
-            currentTranslate = prevTranslate + (diff / carousel.offsetWidth * 100);
-            carousel.style.transform = `translateX(${currentTranslate}%)`;
-        }
-
-        function dragEnd(e) {
-            if (!isDragging) return;
-            isDragging = false;
-            const movedBy = currentTranslate - prevTranslate;
-            if (movedBy < -10 && currentSlide < slides.length - 1) {
-                currentSlide++;
-            }
-            if (movedBy > 10 && currentSlide > 0) {
-                currentSlide--;
-            }
-            goToSlide(currentSlide);
-        }
-
-        function getPositionX(e) {
-            return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-        }
-
+        let touchStartX = 0;
+        carousel.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        carousel.addEventListener('touchend', e => {
+            const touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) nextSlide();
+            if (touchEndX - touchStartX > 50) prevSlide();
+        });
+        
+        // Keyboard support
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+        });
+        
         // Auto-slide every 5 seconds
         setInterval(nextSlide, 5000);
     </script>
