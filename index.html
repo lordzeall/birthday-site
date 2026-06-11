@@ -497,63 +497,100 @@
             margin-bottom: 50px;
         }
 
-        /* Carousel */
-        .carousel-wrapper {
+        /* Carousel 3D */
+        .carousel-container {
             position: relative;
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
+            height: 500px;
+            perspective: 1000px;
         }
 
-        .carousel {
-            display: flex;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: grab;
-        }
-
-        .carousel:active {
-            cursor: grabbing;
-        }
-
-        .carousel-item {
-            min-width: 100%;
-            padding: 0 20px;
-            box-sizing: border-box;
-        }
-
-        .carousel-item img {
+        .carousel-3d {
+            position: relative;
             width: 100%;
-            height: 450px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-3d .slide {
+            position: absolute;
+            width: 80%;
+            height: 100%;
+            left: 10%;
+            opacity: 0;
+            transform: scale(0.8) translateX(100%);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        .carousel-3d .slide.active {
+            opacity: 1;
+            transform: scale(1) translateX(0);
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .carousel-3d .slide.prev {
+            opacity: 0.5;
+            transform: scale(0.85) translateX(-80%) rotateY(15deg);
+            z-index: 5;
+        }
+
+        .carousel-3d .slide.next {
+            opacity: 0.5;
+            transform: scale(0.85) translateX(80%) rotateY(-15deg);
+            z-index: 5;
+        }
+
+        .slide .photo-frame {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.1);
+            transform: rotate(-2deg);
             transition: transform 0.4s ease;
         }
 
-        .carousel-item img:hover {
-            transform: scale(1.02);
+        .slide.active .photo-frame {
+            transform: rotate(0deg);
         }
 
-        .carousel-item .placeholder-img {
+        .slide .photo-frame img {
             width: 100%;
-            height: 450px;
-            background: linear-gradient(135deg, var(--rose-light) 0%, white 100%);
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .slide .photo-frame .caption {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.95);
+            padding: 8px 20px;
             border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            font-size: 0.8rem;
+            color: var(--dark);
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            white-space: nowrap;
         }
 
-        .carousel-item .placeholder-img .icon {
-            font-size: 5rem;
-            margin-bottom: 15px;
-        }
-
-        .carousel-item .placeholder-img .text {
-            font-size: 0.9rem;
-            color: #999;
-            letter-spacing: 2px;
+        .slide .photo-frame .tape {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-5deg);
+            width: 80px;
+            height: 25px;
+            background: rgba(255, 220, 150, 0.7);
+            border-radius: 3px;
         }
 
         /* Carousel Navigation */
@@ -562,44 +599,82 @@
             justify-content: center;
             align-items: center;
             gap: 20px;
-            margin-top: 30px;
+            margin-top: 40px;
         }
 
         .carousel-btn {
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             background: white;
             border: none;
             border-radius: 50%;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .carousel-btn:hover {
             transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(232, 160, 191, 0.3);
+            box-shadow: 0 8px 25px rgba(232, 160, 191, 0.4);
+            background: var(--soft-pink);
         }
 
-        .carousel-dots {
+        .carousel-counter {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--rose);
+            min-width: 60px;
+        }
+
+        /* Thumbnail strip */
+        .thumbnail-strip {
             display: flex;
-            gap: 10px;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 25px;
+            overflow-x: auto;
+            padding: 10px 0;
+            max-width: 100%;
         }
 
-        .carousel-dot {
-            width: 10px;
-            height: 10px;
+        .thumbnail-strip::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .thumbnail-strip::-webkit-scrollbar-track {
             background: var(--rose-light);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            border-radius: 2px;
         }
 
-        .carousel-dot.active {
+        .thumbnail-strip::-webkit-scrollbar-thumb {
             background: var(--rose);
-            width: 30px;
-            border-radius: 5px;
+            border-radius: 2px;
+        }
+
+        .thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            flex-shrink: 0;
+        }
+
+        .thumb.active {
+            opacity: 1;
+            border-color: var(--rose);
+            transform: scale(1.1);
+        }
+
+        .thumb:hover {
+            opacity: 0.8;
         }
 
         /* ═══ FOOTER ═══ */
@@ -748,148 +823,6 @@
             </div>
         </section>
 
-        <!-- Gallery -->
-        <section class="gallery-section">
-            <p class="label">Momen</p>
-            <h2>Indah Kita</h2>
-            <div class="carousel-wrapper">
-                <div class="carousel" id="carousel">
-                    <div class="carousel-item">
-                        <img src="photos/1.jpg" alt="Foto 1" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/2.jpg" alt="Foto 2" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/3.jpg" alt="Foto 3" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/4.jpg" alt="Foto 4" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/5.jpg" alt="Foto 5" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/6.jpg" alt="Foto 6" loading="lazy">
-                    </div>
-
-                    <div class="carousel-item">
-                        <img src="photos/8.jpg" alt="Foto 8" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/9.jpg" alt="Foto 9" loading="lazy">
-                    </div>
-
-                    <div class="carousel-item">
-                        <img src="photos/11.jpg" alt="Foto 11" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/12.jpg" alt="Foto 12" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/13.jpg" alt="Foto 13" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/14.jpg" alt="Foto 14" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/15.jpg" alt="Foto 15" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/16.jpg" alt="Foto 16" loading="lazy">
-                    </div>
-
-                    <div class="carousel-item">
-                        <img src="photos/18.jpg" alt="Foto 18" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/19.jpg" alt="Foto 19" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/20.jpg" alt="Foto 20" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/21.jpg" alt="Foto 21" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/22.jpg" alt="Foto 22" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/23.jpg" alt="Foto 23" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/24.jpg" alt="Foto 24" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/25.jpg" alt="Foto 25" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/26.jpg" alt="Foto 26" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/27.jpg" alt="Foto 27" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/28.jpg" alt="Foto 28" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/29.jpg" alt="Foto 29" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/30.jpg" alt="Foto 30" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/31.jpg" alt="Foto 31" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/32.jpg" alt="Foto 32" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/33.jpg" alt="Foto 33" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/34.jpg" alt="Foto 34" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/35.jpg" alt="Foto 35" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/36.jpg" alt="Foto 36" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/37.jpg" alt="Foto 37" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/38.jpg" alt="Foto 38" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/39.jpg" alt="Foto 39" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/40.jpg" alt="Foto 40" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/41.jpg" alt="Foto 41" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/19.jpg" alt="Foto 19" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/20.jpg" alt="Foto 20" loading="lazy">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="photos/21.jpg" alt="Foto 21" loading="lazy">
-                    </div>
-                </div>
-                <div class="carousel-nav">
-                    <button class="carousel-btn" onclick="prevSlide()">‹</button>
-                    <div class="carousel-dots" id="carouselDots"></div>
-                    <button class="carousel-btn" onclick="nextSlide()">›</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
         <footer>
             <div class="hearts">💖</div>
             <p>Made with love, for you 💕</p>
@@ -1026,84 +959,6 @@
             });
         }
 
-        // ═══ CAROUSEL ═══
-        let currentSlide = 0;
-        const carousel = document.getElementById('carousel');
-        const dotsContainer = document.getElementById('carouselDots');
-        let slides = document.querySelectorAll('.carousel-item');
-        let isDragging = false;
-        let startPos = 0;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
-
-        // Create dots
-        slides.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-            dot.onclick = () => goToSlide(i);
-            dotsContainer.appendChild(dot);
-        });
-
-        function updateDots() {
-            document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentSlide);
-            });
-        }
-
-        function goToSlide(index) {
-            currentSlide = index;
-            currentTranslate = -index * 100;
-            prevTranslate = currentTranslate;
-            carousel.style.transform = `translateX(${currentTranslate}%)`;
-            updateDots();
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            goToSlide(currentSlide);
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            goToSlide(currentSlide);
-        }
-
-        // Touch/Swipe support
-        carousel.addEventListener('mousedown', dragStart);
-        carousel.addEventListener('mousemove', drag);
-        carousel.addEventListener('mouseup', dragEnd);
-        carousel.addEventListener('mouseleave', dragEnd);
-        carousel.addEventListener('touchstart', dragStart);
-        carousel.addEventListener('touchmove', drag);
-        carousel.addEventListener('touchend', dragEnd);
-
-        function dragStart(e) {
-            isDragging = true;
-            startPos = getPositionX(e);
-        }
-
-        function drag(e) {
-            if (!isDragging) return;
-            const currentPosition = getPositionX(e);
-            const diff = currentPosition - startPos;
-            currentTranslate = prevTranslate + (diff / carousel.offsetWidth * 100);
-            carousel.style.transform = `translateX(${currentTranslate}%)`;
-        }
-
-        function dragEnd(e) {
-            if (!isDragging) return;
-            isDragging = false;
-            const movedBy = currentTranslate - prevTranslate;
-            if (movedBy < -10 && currentSlide < slides.length - 1) {
-                currentSlide++;
-            }
-            if (movedBy > 10 && currentSlide > 0) {
-                currentSlide--;
-            }
-            goToSlide(currentSlide);
-        }
-
-        function getPositionX(e) {
             return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
         }
 
